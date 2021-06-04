@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: head"></div>
+<body>
+
+<header>
+    <div th:replace="fragments/nav-bar :: nav_bar"></div>
+</header>
+
+<div th:switch="${toptenlords.size()}">
+    <h2 th:case="0">Выбирать некого...</h2>
+    <div class="m-5 mt-1" th:case="*">
+        <table class="table table-striped text-left table-row-cell border border-2 border-secondary">
+            <thead>
+            <tr>
+                <th class="col-4 text-center" scope="col">№</th>
+                <th class="col-4 text-center" scope="col">Имя</th>
+                <th class="col-4 text-center" scope="col">Возраст</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lord, iter : ${toptenlords}" >
+                <td class="col-4 text-center" th:text="${iter.index+1}"></td>
+                <td class="col-4 text-center" th:text="${lord.getName()}"></td>
+                <td class="col-4 text-center" th:text="${lord.getAge()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

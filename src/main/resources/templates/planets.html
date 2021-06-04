@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: head"></div>
+<body>
+<header>
+    <div th:replace="fragments/nav-bar :: nav_bar"></div>
+</header>
+<button onclick="showPlanetConstructor()" class="btn btn-secondary m-5 mt-2 mb-1">Создать планету</button>
+<div th:switch="${planets.size()}">
+    <h2 th:case="0">Планеты еще не созданы...</h2>
+    <div class="m-5 mt-1" th:case="*">
+        <table class="table table-striped text-left table-row-cell border border-2 border-secondary">
+            <thead>
+            <tr>
+                <th class="col-4 text-center" scope="col">Название</th>
+                <th class="col-4 text-center" scope="col">Правитель</th>
+                <th class="col-4 text-center" scope="col">Функции</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="planet : ${planets}">
+                <td class="col-4 text-center" id="planetName" th:text="${planet.getName()}"></td>
+                <td class="col-4 text-center" id="lordName" th:text="${planet.getLord().getName()}"></td>
+                <td class="col-4 text-center">
+                    <button onclick="showModal(event)" class="btn btn-success">Назначить правителя</button>
+                    <button onclick="deletePlanet(event)" class="btn btn-danger">Уничтожить планету</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Назначить правителя</h5>
+                <button type="button" onclick="" class="btn btn-secondary" id="modalhide" data-bs-dismiss="modal">Close
+                </button>
+            </div>
+            <div class="p-3">
+                <div class="mt-1">
+                    <h6>Название планеты</h6>
+                    <input class="form-control" id="plname" type="text" aria-label="readonly input example" readonly>
+                </div>
+                <div class="mt-1">
+                    <h6>Текущий правитель</h6>
+                    <input class="form-control" id="lname" type="text" aria-label="readonly input example" readonly>
+                </div>
+                <div class="mt-1">
+                    <h6>Новый правитель</h6>
+                    <label class="text-danger" id="invalidLord" hidden="true">Правитель не найден!</label>
+                    <input class="form-control" id="newlordname" type="text" aria-label="readonly input example">
+                </div>
+                <div class="mt-3">
+                    <button onclick="updatePlanet()" id="#savemodal" class="btn btn-success mt-2">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createPlanetModal" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="planetConstructor">Создать планету</h5>
+                <button type="button" onclick="" class="btn btn-secondary" id="plModalHide" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+            <div class="p-3">
+                <div class="mt-1">
+                    <h6>Название планеты</h6>
+                    <label class="text-danger" id="invalidPlanetName" hidden="true">Такая планета уже
+                        существует!</label>
+                    <input class="form-control" id="newPlanetName" type="text">
+                </div>
+                <div class="mt-1">
+                    <h6>Правитель</h6>
+                    <label class="text-danger" id="invalidLordName" hidden="true">Правитель не найден!</label>
+                    <input class="form-control" id="addLord" type="text">
+                </div>
+                <div class="mt-3">
+                    <button onclick="createPlanet()" id="#saveCreatePlanetModal" class="btn btn-success mt-2">Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

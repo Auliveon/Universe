@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header :: head"></div>
+<body>
+<header>
+    <div th:replace="fragments/nav-bar :: nav_bar"></div>
+</header>
+<button onclick="showLordConstructor()" class="btn btn-secondary m-5 mt-2 mb-1">Создать правителя</button>
+<div th:switch="${lords.size()}">
+    <h2 th:case="0">Правителей пока что нету</h2>
+    <div class="m-5 mt-1" th:case="*">
+        <table class="table table-striped text-left table-row-cell border border-2 border-secondary">
+            <thead>
+            <tr>
+                <th class="col-4 text-center" scope="col">Имя</th>
+                <th class="col-4 text-center" scope="col">Возраст</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lord : ${lords}">
+                <td class="col-4 text-center" th:text="${lord.getName()}"></td>
+                <td class="col-4 text-center" th:text="${lord.getAge()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="modal fade" id="createLord" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Создать правителя</h5>
+                <button type="button" onclick="" class="btn btn-secondary" id="createLordModalHide"
+                        data-bs-dismiss="modal">Close
+                </button>
+            </div>
+            <div class="p-3">
+                <div class="mt-1">
+                    <h6>Имя</h6>
+                    <label class="text-danger" id="invalidLord" hidden="true">Такой правитель уже существует!</label>
+                    <input class="form-control" id="lordName" type="text">
+                </div>
+                <div class="mt-3">
+                    <h6>Возраст</h6>
+                    <input class="form-control" id="lordAge" type="number">
+                </div>
+                <div class="mt-3">
+                <button onclick="createLord()" id="#savemodal" class="btn btn-success">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
