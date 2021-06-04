@@ -16,7 +16,7 @@ function updatePlanet() {
     let newLordName = document.querySelector('#newlordname').value;
     fetch("/update", {
         method: "POST",
-        body: JSON.stringify(`${planetName}-${newLordName}`),
+        body: JSON.stringify(`${planetName}|${newLordName}`),
         headers: {
             'Content-type': 'application/json'
         }
@@ -65,7 +65,7 @@ function createPlanet() {
 
     fetch("/createplanet", {
         method: "POST",
-        body: JSON.stringify(`${planetName}-${newLordName}`),
+        body: JSON.stringify(`${planetName}|${newLordName}`),
         headers: {
             'Content-type': 'application/json'
         }
@@ -103,7 +103,7 @@ function createLord() {
 
     fetch("/createlord", {
         method: "POST",
-        body: JSON.stringify(`${lordName}-${lordAge}`),
+        body: JSON.stringify(`${lordName}|${lordAge}`),
         headers: {
             'Content-type': 'application/json'
         }

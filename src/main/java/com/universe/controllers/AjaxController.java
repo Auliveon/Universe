@@ -46,7 +46,7 @@ public class AjaxController {
 
             String convertedRequest = StringFormatter.formatRequest(request.getReader().readLine());
 
-            String[] array = convertedRequest.split("-");
+            String[] array = convertedRequest.split("\\|");
 
             Planet planet = planetService.findByName(array[0]);
 
@@ -72,7 +72,7 @@ public class AjaxController {
 
         try {
             String convertedRequest = StringFormatter.formatRequest(request.getReader().readLine());
-            String[] array = convertedRequest.split("-");
+            String[] array = convertedRequest.split("\\|");
             Planet planet = planetService.findByName(array[0]);
             Lord lord = lordService.findByName(array[1]);
             if (planet == null && lord != null) {
@@ -101,7 +101,7 @@ public class AjaxController {
         try {
 
             String convertedRequest = StringFormatter.formatRequest(request.getReader().readLine());
-            String[] array = convertedRequest.split("-");
+            String[] array = convertedRequest.split("\\|");
             Lord lord = lordService.findByName(array[0]);
             if (lord == null) {
                 Lord newLord = new Lord();
